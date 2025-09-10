@@ -21,6 +21,7 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField] SpriteRenderer Sprite;
     public Animator animator;
     float DeltaTime;
+    //float GetVelocity = rb.linearVelocity
     
 
     void Start()
@@ -38,7 +39,7 @@ public class MovementPlayer : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             Direction = Vector2.left;
-            rb.AddForce(Direction * Speed * 100f * DeltaTime);
+            rb.linearVelocityX = Speed * -100f * DeltaTime;
             //Flips the sprites to the left
             Sprite.flipX = true;
         }
@@ -46,7 +47,7 @@ public class MovementPlayer : MonoBehaviour
         else if (Input.GetKey(KeyCode.D))
         {
             Direction = Vector2.right;
-            rb.AddForce(Direction * Speed * 100f * DeltaTime);
+            rb.linearVelocityX = Speed * 100f * DeltaTime;
             //Flips the sprites to the right
             Sprite.flipX = false;
         }
@@ -96,6 +97,8 @@ public class MovementPlayer : MonoBehaviour
         {
             rb.AddForce(Vector2.left * DashForce * 200f);
         }
+
+        
     }
 
 
