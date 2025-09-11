@@ -1,14 +1,7 @@
-//Librerias - Funciones Prestadas de otros scripts
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
-
-//Public - Da permiso de usar su informacion
-//class - forma de declararla
-//MovementPlayer - Nombre del Script
-// : - Herencia, permite usar las funciones y variables de MonoBehaviour
-
-public class MovementPlayer : MonoBehaviour
+using UnityEditor.Animations;
+using System;
+public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] float JumpForce = 5f;
@@ -22,8 +15,8 @@ public class MovementPlayer : MonoBehaviour
     public Animator animator;
     float DeltaTime;
     //float GetVelocity = rb.linearVelocity
-    
 
+    public static event Action<int> Sounds;
     void Start()
     {
         rb.GetComponent<Rigidbody2D>();
@@ -70,13 +63,13 @@ public class MovementPlayer : MonoBehaviour
             //Walking
             animator.SetInteger("AnimationState", 1);
         }
-        
+
         if (rb.linearVelocityY > 0f && !isGrounded)
         {
             //Jumping
             animator.SetInteger("AnimationState", 2);
         }
-        else if(rb.linearVelocityY < 0f && !isGrounded)
+        else if (rb.linearVelocityY < 0f && !isGrounded)
         {
             //Falling
             animator.SetInteger("AnimationState", 3);
@@ -89,7 +82,7 @@ public class MovementPlayer : MonoBehaviour
         {
             rb.AddForce(Vector2.up * JumpForce * 100f);
         }
-        if(Input.GetKeyDown(KeyCode.LeftShift) && Direction == Vector2.right)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Direction == Vector2.right)
         {
             rb.AddForce(Vector2.right * DashForce * 200f);
         }
@@ -98,18 +91,18 @@ public class MovementPlayer : MonoBehaviour
             rb.AddForce(Vector2.left * DashForce * 200f);
         }
 
-        
+
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "Floor")
         {
             isGrounded = true;
         }
-        
-      
+
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -119,6 +112,5 @@ public class MovementPlayer : MonoBehaviour
             isGrounded = false;
         }
     }
-
 
 }
