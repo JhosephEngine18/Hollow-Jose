@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Wall
+  - Cave
   layers:
   - Default
   - TransparentFX

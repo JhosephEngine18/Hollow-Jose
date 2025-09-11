@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class SoundSystem : MonoBehaviour
 
     [SerializeField]GameObject JumpSound;
     GameObject Sound;
+
     private void OnEnable()
     {
         PlayerController.Sounds += SoundsState;
@@ -25,8 +27,8 @@ public class SoundSystem : MonoBehaviour
         switch(state)
         {
             case 0:
-                Sound = JumpSound;
-                Instantiate(Sound);
+                Sound = Instantiate(JumpSound);
+                Destroy(Sound, 0.5f);
                 break;
 
                 case 1:
@@ -35,5 +37,6 @@ public class SoundSystem : MonoBehaviour
         }
 
     }
-    
+
+
 }

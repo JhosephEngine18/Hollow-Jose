@@ -1,2 +1,12 @@
 fileFormatVersion: 2
 guid: ada23ce65993cc14aba9f5aac51fab5d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - JumpSound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

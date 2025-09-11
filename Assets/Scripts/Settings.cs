@@ -4,26 +4,53 @@ using UnityEngine.InputSystem;
 
 public class Settings : MonoBehaviour
 {
-    [SerializeField] int SetFramerate;
-    [SerializeField] TextMeshProUGUI FPS;
-    private float deltaTime = 0.0f;
+    [Header("Options")]
+
+    [SerializeField, Range(0f, 1f)] float MusicVolume;
+
+    [Header("Essentials")]
+    [SerializeField, Tooltip("Add BackGround music for your level")] AudioSource Music;
+    [SerializeField] AudioReverbFilter Filter;
 
     private void Awake()
     {
-        Application.targetFrameRate = SetFramerate;
-        FPS.GetComponent<TextMeshProUGUI>();
+        Application.targetFrameRate = 60;
+        Filter.GetComponent<AudioReverbFilter>();
     }
 
-    // Update is called once per frame
+    private void OnEnable()
+    {
+        PlayerCollisions.Colliding += CheckFilter;
+    }
+    private void OnDisable()
+    {
+        PlayerCollisions.Colliding -= CheckFilter;
+    }
+
+    private void FixedUpdate()
+    {
+        CheckMusic();
+    }
     void Update()
     {
 
-        deltaTime += ((Time.unscaledDeltaTime - deltaTime) * 0.1f); // Smoothed delta time
-        float fps = Mathf.Round(1.0f / deltaTime);
-        FPS.text = "FPS: " + fps;
+    }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+    void CheckMusic()
+    {
+        Music.volume = MusicVolume;
+    }
+
+    void CheckFilter(bool Colliding)
+    {
+        if (Colliding)
         {
+            Filter.dryLevel = -10000f;
+        }
+        else
+        {
+            Filter.dryLevel = 0f;
         }
     }
+
 }
