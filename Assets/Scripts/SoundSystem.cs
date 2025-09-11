@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundSystem : MonoBehaviour
@@ -8,6 +10,7 @@ public class SoundSystem : MonoBehaviour
     private void OnEnable()
     {
         PlayerController.Sounds += SoundsState;
+        Destroy(Sound, 2);
     }
 
     private void OnDisable()
@@ -15,6 +18,7 @@ public class SoundSystem : MonoBehaviour
         PlayerController.Sounds -= SoundsState;
     }
 
+    
 
     void SoundsState(int state)
     {
@@ -31,4 +35,5 @@ public class SoundSystem : MonoBehaviour
         }
 
     }
+    
 }

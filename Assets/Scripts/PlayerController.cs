@@ -1,11 +1,19 @@
 using UnityEngine;
 using UnityEditor.Animations;
 using System;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(Animator))]
+
 public class PlayerController : MonoBehaviour
-{
+{    
     [Header("Movement Settings")]
+    [Tooltip("With this setting you will be able to setup how much the player can Jump")]
     [SerializeField] float JumpForce = 5f;
+    [Tooltip("With this setting you will be able to setup how much the player can Run")]
     [SerializeField] float Speed = 5f;
+    [Tooltip("With this setting you will be able to setup how much the player can Dash")]
     [SerializeField] float DashForce = 5f;
     bool isGrounded = false;
     [Header("Essential Components")]
@@ -14,15 +22,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] SpriteRenderer Sprite;
     public Animator animator;
     float DeltaTime;
-    //float GetVelocity = rb.linearVelocity
-
     public static event Action<int> Sounds;
     void Start()
     {
         rb.GetComponent<Rigidbody2D>();
         animator.GetComponent<Animator>();
         Sprite.GetComponent<SpriteRenderer>();
-        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
@@ -81,6 +86,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector2.up * JumpForce * 100f);
+            Sounds(0);
         }
         if (Input.GetKeyDown(KeyCode.LeftShift) && Direction == Vector2.right)
         {
