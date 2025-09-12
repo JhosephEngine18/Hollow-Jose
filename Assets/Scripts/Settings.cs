@@ -16,6 +16,7 @@ public class Settings : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         Filter.GetComponent<AudioReverbFilter>();
+        Filter.enabled = false;
     }
 
     private void OnEnable()
@@ -45,10 +46,12 @@ public class Settings : MonoBehaviour
     {
         if (Colliding)
         {
+            Filter.enabled = true;
             Filter.dryLevel = -10000f;
         }
         else
         {
+            Filter.enabled = false;
             Filter.dryLevel = 0f;
         }
     }
