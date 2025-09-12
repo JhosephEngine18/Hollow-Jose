@@ -4,7 +4,6 @@ using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
-[RequireComponent(typeof(Animator))]
 
 public class PlayerController : MonoBehaviour
 {    
@@ -23,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     float DeltaTime;
     public static event Action<int> Sounds;
+    bool isCrouching;
     void Start()
     {
         rb.GetComponent<Rigidbody2D>();
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         DeltaTime = Time.deltaTime;
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && !isCrouching)
         {
             Direction = Vector2.left;
             rb.linearVelocityX = Speed * -100f * DeltaTime;
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
             Sprite.flipX = true;
         }
 
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) && !isCrouching)
         {
             Direction = Vector2.right;
             rb.linearVelocityX = Speed * 100f * DeltaTime;
@@ -68,6 +68,18 @@ public class PlayerController : MonoBehaviour
             //Walking
             animator.SetInteger("AnimationState", 1);
         }
+        if(Input.GetKey(KeyCode.S) && isGrounded && rb.linearVelocityX == 0)
+        {
+            //Crouching
+            animator.SetInteger("AnimationState", 4);
+            isCrouching = true;
+
+        }
+        else if(Input.GetKeyUp(KeyCode.S) && isGrounded && rb.linearVelocityX == 0)
+        {
+            isCrouching = false;
+        }
+
 
         if (rb.linearVelocityY > 0f && !isGrounded)
         {
