@@ -4,6 +4,7 @@ using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof (PlayerCollisions))]
 
 public class PlayerController : MonoBehaviour
 {    
