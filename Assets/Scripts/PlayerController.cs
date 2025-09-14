@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor.Animations;
 using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -15,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float Speed = 5f;
     [Tooltip("With this setting you will be able to setup how much the player can Dash")]
     [SerializeField] float DashForce = 5f;
+    [Tooltip("With this setting you will be able to setup how much jumps the player can do")]
+    [SerializeField] int MaxJumps = 4;
     bool isGrounded = false;
     [Header("Essential Components")]
     [SerializeField] Rigidbody2D rb;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     float DeltaTime;
     public static event Action<int> Sounds;
     bool isCrouching;
+    int counter;
     void Start()
     {
         rb.GetComponent<Rigidbody2D>();
@@ -91,15 +93,24 @@ public class PlayerController : MonoBehaviour
         {
             //Falling
             animator.SetInteger("AnimationState", 3);
+            animator.SetBool("isFlying", false);
+        }
+
+        if (rb.linearVelocityY > 0f && !isGrounded && counter >= 2)
+        {
+            //Flying
+            animator.SetInteger("AnimationState", 5);
+            animator.SetBool("isFlying", true);
         }
 
 
 
         //Jump and Dash Controllers
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && counter <= MaxJumps)
         {
             rb.AddForce(Vector2.up * JumpForce * 100f);
             Sounds(0);
+            counter++;
         }
         if (Input.GetKeyDown(KeyCode.LeftShift) && Direction == Vector2.right)
         {
@@ -119,6 +130,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             isGrounded = true;
+            counter = 0;
         }
 
 
