@@ -7,14 +7,15 @@ TagManager:
   - Floor
   - Wall
   - Cave
+  - Direction
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Floor
   - Water
   - UI
-  - 
+  - Wall
   - 
   - 
   - 

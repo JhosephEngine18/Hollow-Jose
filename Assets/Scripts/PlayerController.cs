@@ -16,17 +16,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float DashForce = 5f;
     [Tooltip("With this setting you will be able to setup how much jumps the player can do")]
     [SerializeField] int MaxJumps = 4;
-    bool isGrounded = false;
+    private bool isGrounded;
     [Header("Essential Components")]
     [SerializeField] Rigidbody2D rb;
     Vector2 Direction;
     [SerializeField] SpriteRenderer Sprite;
     public Animator animator;
-    float DeltaTime;
     public static event Action<int> Sounds;
     bool isCrouching;
     int counter;
-    void Start()
+    [SerializeField] LayerMask FloorMask;
+    private void Start()
     {
         rb.GetComponent<Rigidbody2D>();
         animator.GetComponent<Animator>();
@@ -34,13 +34,14 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        DeltaTime = Time.deltaTime;
+        isGrounded = Physics2D.CircleCast(transform.position, 0.2f, Vector2.down, 0.5f, FloorMask);
+        
         if (Input.GetKey(KeyCode.A) && !isCrouching)
         {
             Direction = Vector2.left;
-            rb.linearVelocityX = Speed * -100f * DeltaTime;
+            rb.linearVelocityX = Speed * -1;
             //Flips the sprites to the left
             Sprite.flipX = true;
         }
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKey(KeyCode.D) && !isCrouching)
         {
             Direction = Vector2.right;
-            rb.linearVelocityX = Speed * 100f * DeltaTime;
+            rb.linearVelocityX = Speed;
             //Flips the sprites to the right
             Sprite.flipX = false;
         }
@@ -103,7 +104,10 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isFlying", true);
         }
 
-
+        if (Input.GetKeyDown(KeyCode.Space) && counter > 1 && counter != MaxJumps)
+        {
+            rb.linearVelocityY = 0f;
+        }
 
         //Jump and Dash Controllers
         if (Input.GetKeyDown(KeyCode.Space) && counter <= MaxJumps)
@@ -121,27 +125,11 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector2.left * DashForce * 200f);
         }
 
-
-    }
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Floor")
+        if (isGrounded)
         {
-            isGrounded = true;
             counter = 0;
         }
-
-
+        
     }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Floor")
-        {
-            isGrounded = false;
-        }
-    }
-
+    
 }
