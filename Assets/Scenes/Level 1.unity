@@ -1138,11 +1138,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &664574981 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5659078892392522380, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
-  m_PrefabInstance: {fileID: 2565003755705387404}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &686412254
 GameObject:
   m_ObjectHideFlags: 0
@@ -3367,6 +3362,9 @@ MonoBehaviour:
   rb: {fileID: 2087950621}
   Sprite: {fileID: 1096903454}
   animator: {fileID: 1096903460}
+  FloorMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!70 &2087950620
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3429,7 +3427,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!4 &2087950622
 Transform:
@@ -12979,11 +12977,6 @@ CompositeCollider2D:
   m_OffsetDistance: 0.48
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 2115270522}
---- !u!50 &2140035524204722290 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 8040083046624855899, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
-  m_PrefabInstance: {fileID: 2565003755705387404}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2565003755705387404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13033,32 +13026,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4890903808314225126, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
-      propertyPath: rb
-      value: 
-      objectReference: {fileID: 2140035524204722290}
-    - target: {fileID: 4890903808314225126, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
-      propertyPath: Point
-      value: 
-      objectReference: {fileID: 664574981}
-    - target: {fileID: 4890903808314225126, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
-      propertyPath: sprite
-      value: 
-      objectReference: {fileID: 2597776046670849580}
-    - target: {fileID: 4890903808314225126, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 4766250919752993836}
-    - target: {fileID: 4890903808314225126, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
       propertyPath: distance
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4890903808314225126, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
-      propertyPath: MiddlePoint
-      value: 
-      objectReference: {fileID: 664574981}
-    - target: {fileID: 8040083046624855899, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
-      propertyPath: m_GravityScale
-      value: 1
+      value: 4161.4
       objectReference: {fileID: 0}
     - target: {fileID: 8068523699794409365, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
       propertyPath: m_Name
@@ -13069,11 +13038,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
---- !u!212 &2597776046670849580 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7076352421669647621, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
-  m_PrefabInstance: {fileID: 2565003755705387404}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2616967787105543677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13082,26 +13046,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1683848581446678620, guid: 0bf8f87840994614e84f2060af8c33d0, type: 3}
-      propertyPath: Left
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1683848581446678620, guid: 0bf8f87840994614e84f2060af8c33d0, type: 3}
-      propertyPath: Right
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1683848581446678620, guid: 0bf8f87840994614e84f2060af8c33d0, type: 3}
-      propertyPath: distance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1683848581446678620, guid: 0bf8f87840994614e84f2060af8c33d0, type: 3}
-      propertyPath: movespeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1683848581446678620, guid: 0bf8f87840994614e84f2060af8c33d0, type: 3}
-      propertyPath: FloorMask.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 2028156062169479379, guid: 0bf8f87840994614e84f2060af8c33d0, type: 3}
       propertyPath: m_Name
       value: EnemyLogic
@@ -13151,11 +13095,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bf8f87840994614e84f2060af8c33d0, type: 3}
---- !u!95 &4766250919752993836 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 536990088995086987, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
-  m_PrefabInstance: {fileID: 2565003755705387404}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4920896721259686080
 PrefabInstance:
   m_ObjectHideFlags: 0
