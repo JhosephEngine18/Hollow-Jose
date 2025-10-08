@@ -47,8 +47,6 @@ public class FlyingKirby : MonoBehaviour
         {
             Destroy(gameObject, 0.2f);
         }
-        rb.AddForce(new Vector2(0f, 20f), ForceMode2D.Impulse);
-        
         
         if (Vector2.Distance(Kirby.transform.position, transform.position) < 1f && rb.linearVelocityX > 0)
         {
@@ -58,6 +56,7 @@ public class FlyingKirby : MonoBehaviour
         {
             rbPlayer.AddForce(Vector2.right * 500f);
         }
+
     }
 
     private void FixedUpdate()
