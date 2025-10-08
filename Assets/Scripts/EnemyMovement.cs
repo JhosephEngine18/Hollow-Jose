@@ -5,16 +5,19 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMovement : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    public Rigidbody2D rb, rbPlayer;
     public float movespeed = 5f;
     public SpriteRenderer sprite;
     public Animator animator;
     [SerializeField] LayerMask mask;
     [SerializeField] LayerMask FloorMask; 
-    protected float Timer = 1f;
-    protected bool isTimerStarted = false;
-    protected bool isColliding, isGrounded;
-    [SerializeField] protected float distance;
+    float Timer = 1f;
+    bool isTimerStarted = false;
+    bool isColliding, isGrounded;
+    private RaycastHit2D Distance_E_P;
+    [SerializeField] GameObject Player, Coin;
+    int counterattacks;
+
     private void Start()
     {
         rb = rb.GetComponent<Rigidbody2D>();
@@ -36,8 +39,20 @@ public class EnemyMovement : MonoBehaviour
             isTimerStarted = false;
             Timer = 1f;
         }
-        Debug.Log(Timer);
-        Debug.Log(isTimerStarted);
+        if (Vector2.Distance(Player.transform.position, transform.position) < 1f && rb.linearVelocityX > 0)
+        {
+            rbPlayer.AddForce(Vector2.left * 500f);
+        }
+        else if (Vector2.Distance(Player.transform.position, transform.position) < 1f && rb.linearVelocityX < 0)
+        {
+            rbPlayer.AddForce(Vector2.right * 500f);
+        }
+
+        if (counterattacks == 3 && gameObject)
+        {
+            Destroy(gameObject, 0.2f);
+        }
+        
     }
 
     private void FixedUpdate()
@@ -50,7 +65,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
     }
-    protected void Flip()
+    void Flip()
     {
         movespeed *= -1;
         isTimerStarted = true;
@@ -58,4 +73,20 @@ public class EnemyMovement : MonoBehaviour
 
     }
     
+    
+    private void OnDestroy()
+    {
+        Instantiate(Coin, transform.position, Quaternion.identity);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Attack"))
+        {
+            rb.AddForce(new Vector2(0f, 10f), ForceMode2D.Impulse);
+            counterattacks++;
+        }
+    }
+
+
 }

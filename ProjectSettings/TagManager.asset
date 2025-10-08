@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Cave
   - Direction
+  - Enemy
+  - Attack
   layers:
   - Default
   - TransparentFX

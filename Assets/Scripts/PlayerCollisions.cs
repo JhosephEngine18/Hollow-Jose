@@ -9,14 +9,14 @@ public class PlayerCollisions : MonoBehaviour
     {  
         if(collision.gameObject.CompareTag(GameReferences.Tags.Cave))
         {
-            Colliding(true);
+            if (Colliding != null) Colliding(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(GameReferences.Tags.Cave))
         {
-            Colliding(false);
+            if (Colliding != null) Colliding(false);
         }
     }
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
@@ -26,11 +27,16 @@ public class PlayerController : MonoBehaviour
     bool isCrouching;
     int counter;
     [SerializeField] LayerMask FloorMask;
+    [SerializeField]Collider2D _ColliderHit;
+    [SerializeField] GameObject Enemy, Particles;
+    private bool _Destroyed;
     private void Start()
     {
         rb.GetComponent<Rigidbody2D>();
         animator.GetComponent<Animator>();
         Sprite.GetComponent<SpriteRenderer>();
+        _ColliderHit.enabled = false;
+        _ColliderHit.GetComponentInChildren<Collider2D>().enabled = false;
     }
 
     // Update is called once per frame
@@ -44,6 +50,7 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocityX = Speed * -1;
             //Flips the sprites to the left
             Sprite.flipX = true;
+            _ColliderHit.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
 
         else if (Input.GetKey(KeyCode.D) && !isCrouching)
@@ -52,6 +59,8 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocityX = Speed;
             //Flips the sprites to the right
             Sprite.flipX = false;
+            _ColliderHit.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
         }
 
         if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
@@ -129,7 +138,19 @@ public class PlayerController : MonoBehaviour
         {
             counter = 0;
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            animator.Play("Attack",1,0f);
+            _ColliderHit.GetComponentInChildren<Collider2D>().enabled = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            animator.Play("Idle",1,0f);
+            _ColliderHit.GetComponentInChildren<Collider2D>().enabled = false;
+        }
         
     }
+
     
 }

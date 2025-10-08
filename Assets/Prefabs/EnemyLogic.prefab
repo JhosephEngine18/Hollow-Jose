@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 208100851781912162}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2140035524976387309}
+  rbPlayer: {fileID: 0}
   movespeed: 5
   sprite: {fileID: 2597776047441902259}
   animator: {fileID: 4766250918916051123}
@@ -227,6 +228,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   distance: 10
+  Player: {fileID: 0}
+  Particles: {fileID: 0}
 --- !u!70 &208100851781912162
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

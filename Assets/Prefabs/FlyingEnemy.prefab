@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8040083046624855899}
+  rbPlayer: {fileID: 0}
   movespeed: 5
   sprite: {fileID: 7076352421669647621}
   animator: {fileID: 536990088995086987}
@@ -121,8 +122,11 @@ MonoBehaviour:
   FloorMask:
     serializedVersion: 2
     m_Bits: 8
-  distance: 50
+  distance: 4161.4
+  Player: {fileID: 0}
+  Particles: {fileID: 8940657439249358850, guid: e9da114d352baae48b926ebf629a427a, type: 3}
   Point: {fileID: 5659078892392522380}
+  Kirby: {fileID: 0}
 --- !u!1 &3103739198067876211
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4225660015244484884
 Transform:
   m_ObjectHideFlags: 0
