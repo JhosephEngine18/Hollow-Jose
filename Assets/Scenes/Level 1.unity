@@ -13117,9 +13117,17 @@ PrefabInstance:
       propertyPath: rbPlayer
       value: 
       objectReference: {fileID: 2087950621}
+    - target: {fileID: 4890903808314225126, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8040083046624855899, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
       propertyPath: m_Constraints
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040083046624855899, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8068523699794409365, guid: 5d83a58ddc237f241aaad8ade610df8a, type: 3}
       propertyPath: m_Name
