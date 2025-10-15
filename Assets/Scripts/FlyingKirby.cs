@@ -2,6 +2,11 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum EEnemyState
+{
+    search,idle,attack
+}
+
 public class FlyingKirby : MonoBehaviour
 {
     public Rigidbody2D rb, rbPlayer;
